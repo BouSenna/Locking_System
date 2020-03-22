@@ -1,8 +1,23 @@
 #include "HMI.h"
 
 int main(void){
+	startUp_HMI();
 	while (1){}
 }
+
+void startUp_HMI(void){
+	/// Initialize the devices that will be used. 
+	initialize_Devices();
+	/// Display message to user to inform him to press 0 key when he wishes to begin using the system.
+	initial_LCDScrollText();
+	/// Busy waiting till the end-user presses 0 key.
+	while(Keypad_keylisten() != '0');
+	/// Delay for pressing time.
+	_delay_ms(500);
+	/// Clear the LCD.
+	LCD_WriteCommand(LCD_CLEAR_CMD);
+}
+
 
 void initialize_Devices(void){
 	int BaudRate = 9600;
@@ -13,6 +28,7 @@ void initialize_Devices(void){
 	/// Setting the configurations and initializing USART.
 	USART_Init(BaudRate, NO_PARITY, ONE_STOP_BIT, EIGHT_BITS, ASYNCHRONOUS);
 }
+
 
 void initial_LCDScrollText(void){
 	int i, j, str_size = 30;

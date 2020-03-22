@@ -5,6 +5,23 @@
 #include "../MCAL/USART/USART_Config.h"
 #include "../MCAL/USART/USART Driver.h"
 
+
+/***
+ * [Purpose] Starting and setting up the HMI micro-controller.
+ *
+ * Invoke set of functions: 
+ *      [1] initialize_Devices : Initializes set of devices that will be used.
+ *      [2] initial_LCDScrollText : Displays to the user a message to press 0 if he wishes to start using with the system.
+ * Wait until the user presses on the 0 key.
+ * Clear the screen. 
+ *
+ * [Arguments] None.
+ * [Return Type] Void.
+ *
+ ***/
+void startUp_HMI(void);
+
+
 /***
  * [Purpose] Initialize the devices that HMI micro-controller interfaces with.
  *
@@ -22,6 +39,8 @@
  *
  ***/
 void initialize_Devices(void);
+
+
 
 /***
  * [Purpose] Display message to the user to inform him that he should press 0 key to begin using the system. 
