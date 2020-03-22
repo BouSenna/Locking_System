@@ -9,6 +9,18 @@
 
 
 /***
+ * [Purpose] Starting and setting up the controller micro-controller.
+ *
+ * Invokes initialize_Devices : Initializes set of devices that will be used.
+ *
+ * [Arguments] None.
+ * [Return Type] Void.
+ *
+ ***/
+void startUp_Controller(void);
+
+
+/***
  * [Purpose] Initialize the devices that controller micro-controller interfaces with.
  * 
  * [1] Initializes USART by setting the baud-rate, parity mode, type of stop-bit, character size and synchronization mode as following:

@@ -1,8 +1,14 @@
 #include "Controller.h"
 
 int main(void){
+	startUp_Controller();
 	while (1){}
 }
+
+void startUp_Controller(void){
+	initialize_Devices();
+}
+
 
 void initialize_Devices(void){
 	int BaudRate = 9600;
