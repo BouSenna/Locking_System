@@ -141,3 +141,21 @@ void firstTime_SystemOperations(void);
  *
  ***/
 void setPassword(U8 *password, int action);
+
+
+
+/***
+ * [Purpose] Take two arrays and checks whether the value of both of them matches or not.
+ * 
+ * Loop with the PASSWORD_SIZE and compare the values of the two passwords
+ * If the two passwords are identical, it will return 1. 
+ * If the two passwords are different, it will return 0.
+ *
+ * [Arguments]
+ *  [1] *pass1 : a pointer to the address of the array that represents the first password.
+ *  [2] *pass2 : a pointer to the address of the array that represents the second password.
+ *
+ * [Return Type] int.
+ *
+ ***/
+int passwordMatch(U8* pass1, U8* pass2);

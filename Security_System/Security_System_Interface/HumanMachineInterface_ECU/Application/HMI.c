@@ -136,7 +136,12 @@ void setPassword(U8 *password, int action){
 }
 
 int passwordMatch(U8* pass1, U8* pass2){
-
+	int counter;
+	for(counter = 0; counter < PASSWORD_SIZE; counter++){
+		if(*(pass1 + counter) != *(pass2 + counter))
+			return 0;
+	}
+	return 1;
 }
 
 void clearMemory(){
