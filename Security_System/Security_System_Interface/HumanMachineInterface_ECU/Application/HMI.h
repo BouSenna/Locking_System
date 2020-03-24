@@ -5,9 +5,17 @@
 #include "../MCAL/USART/USART_Config.h"
 #include "../MCAL/USART/USART Driver.h"
 
+#define PASSWORD_SIZE              4
+
+#define SETTING_PASSWORD           0
+#define CONFIRM_PASSWORD           1
+
 #define IS_FIRST_TIME              0x10
 #define SAVED_PASSWORDS            0x11
 #define NO_SAVED_PASSWORDS         0x12
+
+#define PASSWORD_MATCH             0x13
+#define PASSWORD_MISMATCH          0x14
 
 /***
  * [Purpose] Starting and setting up the HMI micro-controller.
@@ -80,3 +88,31 @@ void initial_LCDScrollText(void);
  *
  ***/
 void isFirstTime(void);
+
+
+
+/***
+ * [Purpose] Define the system control flow if the system is being used for the first time.
+ * 
+ * Declare two arrays with the PASSWORD_SIZE
+ *       [1] Password : to store the password in it.
+ *       [2] ConfPassword : used for confirmation.
+ * Invoke setPassword function two times 
+ *       [1] Allow the users to enter the password and store it in Password array.
+ *       [2] Allow the users to re-enter the password and store it in ConfPassword array.
+ * Compare the value in both of the arrays 
+ * - In case the values were identical,
+ *       [1] A message is displayed to the user confirming that the password is saved successfully.
+ *       [2] PASSWORD_MATCH signal is transmitted to the controller.
+ *       [3] normal_SystemOperations is invoked.
+ * - In case the values were different,
+ *       [1] A message is displayed to the user to inform him that the passwords mismatch.
+ *       [2] PASSWORD_MISMATCH signal is transmitted to the controller.
+ *       [3] clearMemory is invoked to remove the password the user entered from the memory. 
+ *       [4] The whole process is repeated again.
+ *
+ * [Arguments] None.
+ * [Return Type] Void.
+ *
+ ***/
+void firstTime_SystemOperations(void);
