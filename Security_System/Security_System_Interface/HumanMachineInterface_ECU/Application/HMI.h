@@ -5,6 +5,9 @@
 #include "../MCAL/USART/USART_Config.h"
 #include "../MCAL/USART/USART Driver.h"
 
+#define IS_FIRST_TIME              0x10
+#define SAVED_PASSWORDS            0x11
+#define NO_SAVED_PASSWORDS         0x12
 
 /***
  * [Purpose] Starting and setting up the HMI micro-controller.
@@ -61,3 +64,19 @@ void initialize_Devices(void);
  *
  ***/
 void initial_LCDScrollText(void);
+
+
+
+/***
+ * [Purpose] Start communication with the controller to know whether it is the first time to use the system or not. 
+ * 
+ * Transmit IS_FIRST_TIME signal to the controller.
+ * The controller is expected to either send back SAVED_PASSWORDS signal or NO_SAVED_PASSWORDS signal.
+ * - In case the received signal is SAVED_PASSWORDS, normal_SystemOperations function is invoked.
+ * - In case the received signal is NO_SAVED_PASSWORDS, firstTime_SystemOperations functions is invoked.
+ * 
+ * [Arguments] None.
+ * [Return Type] Void.
+ *
+ ***/
+void isFirstTime(void);

@@ -51,3 +51,25 @@ void initial_LCDScrollText(void){
 		_delay_ms(1000);
 	}
 } 
+
+void isFirstTime(void){
+	U8 signal;
+	USART_Transmit(IS_FIRST_TIME);
+	signal = USART_Receive();
+	if(signal == SAVED_PASSWORDS){
+		normal_SystemOperations();
+	}
+	else if(signal == NO_SAVED_PASSWORDS){
+		firstTime_SystemOperations();
+	}
+}
+
+void normal_SystemOperations(void){
+	
+}
+
+
+void firstTime_SystemOperations(void){
+	
+}
+
