@@ -10,12 +10,14 @@
 #define SETTING_PASSWORD           0
 #define CONFIRM_PASSWORD           1
 
-#define IS_FIRST_TIME              0x10
-#define SAVED_PASSWORDS            0x11
-#define NO_SAVED_PASSWORDS         0x12
+#define ENTER_PASSWORD             0x10
 
-#define PASSWORD_MATCH             0x13
-#define PASSWORD_MISMATCH          0x14
+#define IS_FIRST_TIME              0x11
+#define SAVED_PASSWORDS            0x12
+#define NO_SAVED_PASSWORDS         0x13
+
+#define PASSWORD_MATCH             0x14
+#define PASSWORD_MISMATCH          0x15
 
 /***
  * [Purpose] Starting and setting up the HMI micro-controller.
@@ -116,3 +118,26 @@ void isFirstTime(void);
  *
  ***/
 void firstTime_SystemOperations(void);
+
+
+
+/***
+ * [Purpose] Read the password entered by the user, store it in the array passed to the function and transmit it to the controller to be stored in memory.  
+ * 
+ * Transmit ENTER_PASSWORD signal to the controller.
+ * - In case the action passed to the function is SETTING_PASSWORD,
+ *       [1] Display a message asking the user to enter the password. 
+ *       [2] Read the input from the user, store it in the array passed to the function and display it on the LCD screen.  
+ *       [3] Transmit the password to the controller to store it in the memory.
+ * - In case the action passed to the function is CONFIRM_PASSWORD,
+ *       [1] Display a message asking the user to re-enter the password.
+ *       [2] Read the input from the user, store it in the array passed to the function and display it on the LCD screen.
+ *
+ * [Arguments]
+ *  [1] *password : a pointer to the address of the array we want to store the password in.
+ *  [2] action : integer variable holding the action we want to perform, it could either be SETTING_PASSWORD (0) or CONFIRM_PASSWORD (1).
+ *
+ * [Return Type] Void.
+ *
+ ***/
+void setPassword(U8 *password, int action);

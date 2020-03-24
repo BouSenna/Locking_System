@@ -102,7 +102,37 @@ void firstTime_SystemOperations(void){
 }
 
 void setPassword(U8 *password, int action){
+	int i;
+	USART_Transmit(ENTER_PASSWORD);
+	/// In case you are entering the password for the first time
+	if (action == SETTING_PASSWORD){
+		LCD_WriteCommand(LCD_CLEAR_CMD);
+		LCD_WriteString("Enter password:");
+		LCD_SetCursor(1,0);
+		LCD_WriteCharacter(' ');
+		for(i=0 ; i<PASSWORD_SIZE ; i++) {
+			/// Send pressed key to Controller to store it.
+			while((*(password + i) = Keypad_keylisten()) ==' ');
+			USART_Transmit(*(password + i));
+			LCD_WriteCharacter('*');
+			_delay_ms(5000);
+		}
+	}
 	
+	/// Re-writing the password for confirmation.
+	else if (action == CONFIRM_PASSWORD){
+		LCD_WriteCommand(LCD_CLEAR_CMD);
+		LCD_WriteString("Reenter password");
+		LCD_SetCursor(1,0);
+		LCD_WriteCharacter(' ');
+		for(i=0 ; i<PASSWORD_SIZE ; i++) {
+			/// Send pressed key to Controller to store it.
+			while((*(password + i) = Keypad_keylisten()) ==' ');
+			LCD_WriteCharacter('*');
+			_delay_ms(5000);
+		}
+	}
+	LCD_WriteCommand(LCD_CLEAR_CMD);
 }
 
 int passwordMatch(U8* pass1, U8* pass2){
