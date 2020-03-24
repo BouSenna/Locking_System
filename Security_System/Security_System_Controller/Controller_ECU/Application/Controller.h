@@ -7,6 +7,11 @@
 #include "../HAL/Buzzer/Buzzer Driver.h"
 #include "../HAL/EEPROM/EEPROM Driver.h"
 
+#define FIRST_TIME_CHECK_ADDRESS   0xfff  /// TODO: Check the data sheet
+
+#define IS_FIRST_TIME              0x10
+#define SAVED_PASSWORDS            0x11
+#define NO_SAVED_PASSWORDS         0x12
 
 /***
  * [Purpose] Starting and setting up the controller micro-controller.
@@ -41,3 +46,21 @@ void startUp_Controller(void);
  *
  ***/
 void initialize_Devices(void);
+
+
+
+/***
+ * [Purpose] Start communication with the HMI to inform it whether it is the first time to use the system or not. 
+ * 
+ * Wait for IS_FIRST_TIME signal to be transmitted from the HMI micro-controller.
+ * Read the date stored in FisrtTimeCheckAddress that acts as a flag to know whether there is saved password or not.
+ * Stores the value found in FisrtTimeCheckData variable.
+ * - If the data stored in FisrtTimeCheckData equals SAVED_PASSWORDS, SAVED_PASSWORDS signal is transmitted to the HMI.
+ * - If the data stored in FisrtTimeCheckData equals NO_SAVED_PASSWORDS, NO_SAVED_PASSWORDS signal is transmitted to the HMI
+ *   and storePassword function is invoked.
+ *
+ * [Arguments] None.
+ * [Return Type] Void.
+ *
+ ***/
+void isFirstTime(void);
