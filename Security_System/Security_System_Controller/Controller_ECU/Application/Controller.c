@@ -58,3 +58,13 @@ void firstTime_SystemOperations(void){
     }
 
 }
+
+void setPassword(){
+	int i;
+	for(i = 0 ; i < PASSWORD_SIZE ; i++){
+		EEPROM_Write(EEPROM_BASE_ADDRESS + i, USART_Receive());
+		_delay_ms(100);
+	}
+	EEPROM_Write(FIRST_TIME_CHECK_ADDRESS, SAVED_PASSWORDS);
+	_delay_ms(100);
+}

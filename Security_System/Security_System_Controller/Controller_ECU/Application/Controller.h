@@ -92,3 +92,18 @@ void isFirstTime(void);
  ***/
 void firstTime_SystemOperations(void);
 
+
+
+/***
+ * [Purpose] Receive the password from the HMI micro-controller and store it in memory.
+ * 
+ * Store the password transmitted by the HMI and store it in the memory.
+ * Write SAVED_PASSWORDS in FisrtTimeCheckAddress which acts as a flag to know whether there is a saved password in the  
+ * system or not.
+ *
+ * [Arguments] None.
+ * [Return Type] Void.
+ *
+ ***/
+void setPassword(void);
+
