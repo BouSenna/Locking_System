@@ -42,5 +42,19 @@ void normal_SystemOperations(void){
 }
 
 void firstTime_SystemOperations(void){
- 
+    U8 signal;
+    /// Busy wait until the HMI sends a signal to store new password.
+    while(USART_Receive() != ENTER_PASSWORD);
+	_delay_ms(100);
+    setPassword();
+    signal = USART_Receive();
+
+	if(signal == PASSWORD_MISMATCH){
+        firstTime_SystemOperations();
+    }
+	
+    else if(signal == PASSWORD_MATCH){
+	    normal_SystemOperations();
+    }
+
 }

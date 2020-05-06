@@ -7,11 +7,21 @@
 #include "../HAL/Buzzer/Buzzer Driver.h"
 #include "../HAL/EEPROM/EEPROM Driver.h"
 
-#define FIRST_TIME_CHECK_ADDRESS   0xfff  /// TODO: Check the data sheet
 
-#define IS_FIRST_TIME              0x10
-#define SAVED_PASSWORDS            0x11
-#define NO_SAVED_PASSWORDS         0x12
+#define EEPROM_BASE_ADDRESS        0x0000 	/// TODO: Check the data sheet
+#define FIRST_TIME_CHECK_ADDRESS   0xffff	/// TODO: Check the data sheet
+#define PASSWORD_SIZE              4
+
+#define ENTER_PASSWORD             0x10
+
+#define IS_FIRST_TIME              0x11
+#define SAVED_PASSWORDS            0x12
+#define NO_SAVED_PASSWORDS         0x13
+
+
+#define PASSWORD_MATCH             0x14
+#define PASSWORD_MISMATCH          0x15
+
 
 /***
  * [Purpose] Starting and setting up the controller micro-controller.
@@ -64,3 +74,21 @@ void initialize_Devices(void);
  *
  ***/
 void isFirstTime(void);
+
+
+
+/***
+ * [Purpose] Define the system control flow if the system is being used for the first time.
+ * 
+ * Wait until ENTER_PASSWORD signal is received.
+ * Invoke setPassword function : receives the password from the HMI micro-controller and store it in memory
+ * Receive a signal from the HMI micro-controller, it could either be PASSWORD_MATCH or PASSWORD_MISMATCH
+ * - In case the signal is PASSWORD_MATCH, normal_SystemOperations is invoked.
+ * - In case the signal is PASSWORD_MISMATCH, firstTime_SystemOperations is invoked to repeat the process again.
+ *
+ * [Arguments] None.
+ * [Return Type] Void.
+ *
+ ***/
+void firstTime_SystemOperations(void);
+
