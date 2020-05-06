@@ -71,8 +71,9 @@ void normal_SystemOperations(void){
 
 void firstTime_SystemOperations(void){
 	U8 Password[PASSWORD_SIZE];
-	U8 ConfPassword[PASSWORD_SIZE];
-	
+	U8	ConfPassword[PASSWORD_SIZE];
+	USART_Transmit(ENTER_PASSWORD);
+
 	/* This is a function to enter the password you want to set*/
 	setPassword(Password, SETTING_PASSWORD);
 	/* Re-enter the password for verification */
@@ -82,7 +83,7 @@ void firstTime_SystemOperations(void){
 		LCD_WriteString(" Password Saved.");
 		USART_Transmit(PASSWORD_MATCH);
 		_delay_ms(10000);
-	    normal_SystemOperations();
+		normal_SystemOperations();
 	}
 	
 	else {
@@ -103,14 +104,13 @@ void firstTime_SystemOperations(void){
 
 void setPassword(U8 *password, int action){
 	int i;
-	USART_Transmit(ENTER_PASSWORD);
 	/// In case you are entering the password for the first time
 	if (action == SETTING_PASSWORD){
 		LCD_WriteCommand(LCD_CLEAR_CMD);
 		LCD_WriteString("Enter password:");
 		LCD_SetCursor(1,0);
 		LCD_WriteCharacter(' ');
-		for(i=0 ; i<PASSWORD_SIZE ; i++) {
+		for(i = 0 ; i < PASSWORD_SIZE ; i++) {
 			/// Send pressed key to Controller to store it.
 			while((*(password + i) = Keypad_keylisten()) ==' ');
 			USART_Transmit(*(password + i));
@@ -125,7 +125,7 @@ void setPassword(U8 *password, int action){
 		LCD_WriteString("Reenter password");
 		LCD_SetCursor(1,0);
 		LCD_WriteCharacter(' ');
-		for(i=0 ; i<PASSWORD_SIZE ; i++) {
+		for(i = 0 ; i < PASSWORD_SIZE ; i++) {
 			/// Send pressed key to Controller to store it.
 			while((*(password + i) = Keypad_keylisten()) ==' ');
 			LCD_WriteCharacter('*');
