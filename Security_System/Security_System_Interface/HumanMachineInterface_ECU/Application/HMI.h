@@ -180,3 +180,22 @@ int passwordMatch(U8* pass1, U8* pass2);
  *
  ***/
 void normal_SystemOperations(void);
+
+
+
+/***
+ * [Purpose] Allows the user to enter the password and send it to the controller to check whether it's correct or not.
+ * 
+ * Display message asking the user to enter the password.
+ * Transmit ENTER_PASSWORD signal to the controller.
+ * Let the user enter the password, send it to the controller to check its validity and wait for the controller to respond.
+ * The controller is expected to either send back CORRECT_PASSWORD signal or INCORRECT_PASSWORD signal or REPEATEDLY_INCORRECT.
+ * - In case the received signal is CORRECT_PASSWORD, display message that welcomes the user and return back to normal_SystemOperations function.
+ * - In case the received signal is INCORRECT_PASSWORD, display message informing the user that the password is incorrect and repeat the process.
+ * - In case the received signal is REPEATEDLY_INCORRECT, display message informing the user that the system us locked the restart the system after receiving signal to unlock the system.
+ *
+ * [Arguments] None.
+ * [Return Type] Void.
+ *
+ ***/
+void enterPassword(void);

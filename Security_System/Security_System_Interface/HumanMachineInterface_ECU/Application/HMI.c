@@ -160,3 +160,44 @@ void normal_SystemOperations(void){
 		openDoor();
 	}
 }
+
+void enterPassword(void){
+	U8 entry, signal;
+	int i;
+	USART_Transmit(ENTER_PASSWORD);
+	
+	LCD_WriteCommand(LCD_CLEAR_CMD);
+	LCD_WriteString("Enter password:");
+	LCD_SetCursor(1,0);
+	LCD_WriteCharacter(' ');
+	
+	for(i = 0 ; i< PASSWORD_SIZE ; i++) {
+		/// Send pressed key to Controller to store it.
+		while(entry = Keypad_keylisten() == ' ');
+		USART_Transmit(entry);
+		LCD_WriteCharacter('*');
+		_delay_ms(5000);
+	}
+	
+	signal = USART_Receive();
+	
+	if(signal == CORRECT_PASSWORD){
+		LCD_WriteCommand(LCD_CLEAR_CMD);
+		LCD_WriteString("Welcome!!");
+	}
+	else if(signal == INCORRECT_PASSWORD){
+		LCD_WriteCommand(LCD_CLEAR_CMD);
+		LCD_WriteString("Wrong password!!");
+		_delay_ms(30000);
+		enterPassword();
+	}
+	else if(signal == REPEATEDLY_INCORRECT){
+		LCD_WriteCommand(LCD_CLEAR_CMD);
+		LCD_WriteString("System Locked..");
+		LCD_SetCursor(1,0);
+		
+		while(USART_Receive() != SYSTEM_UNLOCKED);
+		normal_SystemOperations();
+	}
+	
+}
