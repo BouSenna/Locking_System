@@ -10,6 +10,7 @@
 
 #define EEPROM_BASE_ADDRESS        0x0000 	/// TODO: Check the data sheet
 #define FIRST_TIME_CHECK_ADDRESS   0xffff	/// TODO: Check the data sheet
+
 #define PASSWORD_SIZE              4
 
 #define ENTER_PASSWORD             0x10
@@ -21,6 +22,20 @@
 
 #define PASSWORD_MATCH             0x14
 #define PASSWORD_MISMATCH          0x15
+
+
+#define CORRECT_PASSWORD           0x16
+#define INCORRECT_PASSWORD         0x17
+#define REPEATEDLY_INCORRECT       0x18
+
+#define REQUEST_TO_CHANGE_PASS     0x19
+#define REQUEST_TO_OPEN_DOOR       0x20
+
+#define OPENING_DOOR               0x21
+#define CLOSING_DOOR               0x22
+
+#define SYSTEM_UNLOCKED            0x30
+
 
 
 /***
