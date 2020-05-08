@@ -141,3 +141,21 @@ void normal_SystemOperations(void);
  *
  ***/
 void enterPassword(void);
+
+
+
+/***
+ * [Purpose] Check whether the entered password is equivalent to the password stored in memory and store the output in AthorizedUser variable.
+ * 
+ * Declare two arrays with the PASSWORD_SIZE
+ *       [1] Expected_Password : stores the password entered by the user in it.
+ *       [2] Actual_Password : stores the password saved previously in the memory in it
+ * Compare the value in both of the arrays  
+ * - In case the values were identical, the function will return 1.
+ * - In case the values were different, the function will return 0.
+ *
+ * [Arguments] None.
+ * [Return Type] int.
+ *
+ ***/
+int authorityChecking(void);

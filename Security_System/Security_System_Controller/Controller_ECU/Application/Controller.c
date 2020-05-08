@@ -114,3 +114,29 @@ void enterPassword(void){
 		}
 	}
 }
+
+int authorityChecking(void){
+	int Actual_Password[PASSWORD_SIZE], Expected_Password[PASSWORD_SIZE];
+	int i;   /// Loop counter.
+	int Mismatch_Flag = 1; 
+	while(USART_Receive() != ENTER_PASSWORD);
+	
+	/// Store the password entered by the user in Actual_Password array.
+	for(i = 0; i < PASSWORD_SIZE; i++){
+		Expected_Password[i] = USART_Receive();
+	}
+	
+	/// Store the password saved previously in the memory.
+	for(i = 0; i < PASSWORD_SIZE; i++){
+		EEPROM_Read(EEPROM_BASE_ADDRESS + i, Actual_Password[i]);
+	}
+	
+	/// Compare both the entered password and the stored one.
+	for(i = 0; i < PASSWORD_SIZE; i++){
+		if(Actual_Password[i] != Expected_Password[i]){
+			Mismatch_Flag = 0;
+		}
+	}
+	
+	return Mismatch_Flag;
+}
