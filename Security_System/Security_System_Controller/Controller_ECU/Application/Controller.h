@@ -159,3 +159,20 @@ void enterPassword(void);
  *
  ***/
 int authorityChecking(void);
+
+
+
+/***
+ * [Purpose] Open the door as a response to the user request.
+ * 
+ * Invoke DCMotor_ClockwiseRotation function : rotates the motor clockwise opening the door.
+ * Transmit OPENING_DOOR signal to the HMI micro-controller. 
+ *
+ * Invoke DCMotor_AnticlockwiseRotation function : rotates the motor anticlockwise closing the door.
+ * Transmit CLOSING_DOOR signal to the HMI micro-controller.
+ *
+ * [Arguments] None.
+ * [Return Type] void.
+ *
+ ***/
+void openDoor(void);

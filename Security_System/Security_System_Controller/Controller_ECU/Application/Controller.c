@@ -140,3 +140,13 @@ int authorityChecking(void){
 	
 	return Mismatch_Flag;
 }
+
+void openDoor(void){
+	DCMotor_ClockwiseRotation();
+	USART_Transmit(OPENING_DOOR);
+	
+	_delay_ms(50000);
+	
+	DCMotor_AntiClockwiseRotation();
+	USART_Transmit(CLOSING_DOOR);	
+}
