@@ -1,7 +1,9 @@
 #include "HMI.h"
 
+
 int main(void){
 	startUp_HMI();
+	isFirstTime();
 	while (1){}
 }
 
@@ -56,6 +58,7 @@ void isFirstTime(void){
 	U8 signal;
 	USART_Transmit(IS_FIRST_TIME);
 	signal = USART_Receive();
+	
 	if(signal == SAVED_PASSWORDS){
 		normal_SystemOperations();
 	}
