@@ -2,6 +2,7 @@
 
 int main(void){
 	startUp_Controller();
+	isFirstTime();
 	while (1){}
 }
 
@@ -42,19 +43,20 @@ void normal_SystemOperations(void){
 }
 
 void firstTime_SystemOperations(void){
-    U8 signal;
-    /// Busy wait until the HMI sends a signal to store new password.
-    while(USART_Receive() != ENTER_PASSWORD);
+	U8 signal;
+	/// Busy wait until the HMI sends a signal to store new password.
+	while(USART_Receive() != ENTER_PASSWORD);
 	_delay_ms(100);
-    setPassword();
-    signal = USART_Receive();
+	setPassword();
 
-	if(signal == PASSWORD_MISMATCH){
-        firstTime_SystemOperations();
-    }
+	signal = USART_Receive();
 	
-    else if(signal == PASSWORD_MATCH){
-	    normal_SystemOperations();
+	if(signal == PASSWORD_MISMATCH){
+		firstTime_SystemOperations();
+	}
+	
+	else if(signal == PASSWORD_MATCH){
+		normal_SystemOperations();
     }
 
 }
