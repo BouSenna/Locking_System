@@ -122,3 +122,22 @@ void setPassword(void);
  *
  ***/
 void normal_SystemOperations(void);
+
+
+
+/***
+ * [Purpose] Receive the entered password from the HMI and check whether it's correct or not.
+ * 
+ * Declare a static variable that counts the incorrect passwords entered, so we can limit the number of times the user could enter incorrect password before the system is locked.
+ * Invoke authorityChecking function : check whether the entered password is equivalent to the password stored in memory
+ *                                     and store the output in AthorizedUser variable.
+ * - In case the value stored in AthorizedUser equals to 1, CORRECT_PASSWORD signal is transmitted to the HMI.
+ * - In case the value stored in AthorizedUser equals to 0 and Mismatch_Counter is less than 3, INCORRECT_PASSWORD signal is transmitted to the HMI.
+ * - In case the value stored in AthorizedUser equals to 0 and Mismatch_Counter is equal to or more than than 3,
+ *   REPEATEDLY_INCORRECT signal is transmitted to the HMI and the buzzer is turned on.
+ *
+ * [Arguments] None.
+ * [Return Type] Void.
+ *
+ ***/
+void enterPassword(void);

@@ -81,3 +81,36 @@ void normal_SystemOperations(void){
 		changePassword();
 	}
 }
+
+void enterPassword(void){
+	/*This variable counts the number of times the user enters incorrect passwords, 
+	so that we can limit the number of times the user could enter incorrect 
+	password before the system is locked.*/
+	static int Mismatch_Counter = 0;  	
+	
+	/*This function returns 1 if the password the user entered and the
+	one stored in the memory are identical. Otherwise, it returns 0*/
+	int AthorizedUser = authorityChecking(); 
+	
+	if (AthorizedUser){
+		/// Reseting the Mismatch_Counter.
+		Mismatch_Counter = 0; 
+		USART_Transmit(CORRECT_PASSWORD);
+	}
+	
+	else if(!AthorizedUser){
+		Mismatch_Counter++;
+		if(Mismatch_Counter >= 3){
+			USART_Transmit(REPEATEDLY_INCORRECT);
+			Buzzer_TurnOn();
+			_delay_ms(100000);
+			USART_Transmit(SYSTEM_UNLOCKED);
+			normal_SystemOperations();
+		}
+		
+		else {
+			USART_Transmit(INCORRECT_PASSWORD);
+			enterPassword();
+		}
+	}
+}
