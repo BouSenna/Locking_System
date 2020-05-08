@@ -150,3 +150,8 @@ void openDoor(void){
 	DCMotor_AntiClockwiseRotation();
 	USART_Transmit(CLOSING_DOOR);	
 }
+
+void changePassword(){
+	while(USART_Receive() != REQUEST_TO_CHANGE_PASS);
+	firstTime_SystemOperations();
+}
