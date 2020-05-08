@@ -199,3 +199,21 @@ void normal_SystemOperations(void);
  *
  ***/
 void enterPassword(void);
+
+
+
+/***
+ * [Purpose] Wait for opening and closing signals from the controller and notifying the user with the updates.
+ * 
+ * Send REQUEST_TO_OPEN_DOOR signal to the Controller
+ * Wait until OPENING_DOOR signal is received from the controller. When received, 
+ * display a message to the user informing him that the door is unlocked. 
+ *
+ * Wait until CLOSING_DOOR signal is received from the controller. When received,
+ * display a message to the user informing him that the door is locked again.
+ *
+ * [Arguments] None.
+ * [Return Type] Void.
+ *
+ ***/
+void openDoor();
