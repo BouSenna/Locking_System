@@ -159,3 +159,24 @@ void setPassword(U8 *password, int action);
  *
  ***/
 int passwordMatch(U8* pass1, U8* pass2);
+
+
+
+/***
+ * [Purpose] Define the system control flow if the system is previously used and there is saved password. 
+ * 
+ * Invokes enterPassword function : ensures that the user is authorized to use the system.
+ * Display the available operations for the user to choose from
+ *     [1] "New Password" message in the first row.
+ *     [2] "Open the Door" message in the second row.
+ * - In case the user pressed 0 key (chose to change the password),
+ *   changePassword function is invoked.
+ * - In case the user pressed 1 key (chose to open the door),
+ *   openDoor function is invoked.
+ *
+ *
+ * [Arguments] None.
+ * [Return Type] Void.
+ *
+ ***/
+void normal_SystemOperations(void);

@@ -70,3 +70,25 @@ void setPassword(){
 	EEPROM_Write(FIRST_TIME_CHECK_ADDRESS, SAVED_PASSWORDS);
 	_delay_ms(100);
 }
+
+
+
+void normal_SystemOperations(void){
+	U8 operation;
+	enterPassword();
+	
+	/// Display menu
+	LCD_WriteCommand(LCD_CLEAR_CMD);
+	LCD_WriteString("[0]New password");
+	LCD_SetCursor(1,0);
+	LCD_WriteString("[1]Open the door");
+	
+	while((operation = Keypad_keylisten()) ==' ');	/// wait for the user to choose the operation.
+	
+	if(operation == '0'){
+		changePassword();
+	}
+	else if(operation == '1'){
+		openDoor();
+	}
+}
