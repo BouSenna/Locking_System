@@ -38,9 +38,6 @@ void isFirstTime(void){
 	}
 }
 
-void normal_SystemOperations(void){
-	
-}
 
 void firstTime_SystemOperations(void){
 	U8 signal;
@@ -74,21 +71,13 @@ void setPassword(){
 
 
 void normal_SystemOperations(void){
-	U8 operation;
 	enterPassword();
+	U8 operation = USART_Receive();
 	
-	/// Display menu
-	LCD_WriteCommand(LCD_CLEAR_CMD);
-	LCD_WriteString("[0]New password");
-	LCD_SetCursor(1,0);
-	LCD_WriteString("[1]Open the door");
-	
-	while((operation = Keypad_keylisten()) ==' ');	/// wait for the user to choose the operation.
-	
-	if(operation == '0'){
-		changePassword();
-	}
-	else if(operation == '1'){
+	if(operation == REQUEST_TO_OPEN_DOOR){
 		openDoor();
+	}
+	else if(operation == REQUEST_TO_CHANGE_PASS){
+		changePassword();
 	}
 }

@@ -107,3 +107,18 @@ void firstTime_SystemOperations(void);
  ***/
 void setPassword(void);
 
+
+
+/***
+ * [Purpose] Define the system control flow if the system is previously used and there is saved password. 
+ * 
+ * Invokes enterPassword function : ensures that the user is authorized to use the system.
+ * Receives the user's choice and store it in operation variable. 
+ * - In case the received signal equals REQUEST_TO_OPEN_DOOR, openDoor function is invoked.
+ * - In case the received signal equals REQUEST_TO_CHANGE_PASS, changePassword function is invoked. 
+ *
+ * [Arguments] None.
+ * [Return Type] Void.
+ *
+ ***/
+void normal_SystemOperations(void);
