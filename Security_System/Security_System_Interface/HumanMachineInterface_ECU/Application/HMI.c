@@ -71,7 +71,7 @@ void normal_SystemOperations(void){
 
 void firstTime_SystemOperations(void){
 	U8 Password[PASSWORD_SIZE];
-	U8	ConfPassword[PASSWORD_SIZE];
+	U8 ConfPassword[PASSWORD_SIZE];
 	USART_Transmit(ENTER_PASSWORD);
 
 	/* This is a function to enter the password you want to set*/
@@ -87,13 +87,12 @@ void firstTime_SystemOperations(void){
 	}
 	
 	else {
-		LCD_WriteCommand(LCD_CLEAR_CMD); 
+		LCD_WriteCommand(LCD_CLEAR_CMD);
 		LCD_WriteString("Didn't Match");
 		LCD_SetCursor(1,0);
 		LCD_WriteString("Please try again");
 		_delay_ms(10000);
 		USART_Transmit(PASSWORD_MISMATCH);
-		clearMemory(); 
 		
 		LCD_WriteCommand(LCD_CLEAR_CMD);
 		firstTime_SystemOperations();
@@ -142,8 +141,4 @@ int passwordMatch(U8* pass1, U8* pass2){
 			return 0;
 	}
 	return 1;
-}
-
-void clearMemory(){
-	
 }
