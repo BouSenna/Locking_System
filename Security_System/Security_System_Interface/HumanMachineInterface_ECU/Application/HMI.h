@@ -217,3 +217,17 @@ void enterPassword(void);
  *
  ***/
 void openDoor();
+
+
+
+/***
+ * [Purpose] Handle the user's request to change the password.
+ * 
+ * Send REQUEST_TO_CHANGE_PASS signal to the Controller
+ * Invoke firstTime_SystemOperations to enter the new password.
+ *
+ * [Arguments] None.
+ * [Return Type] Void.
+ *
+ ***/
+void changePassword(void);

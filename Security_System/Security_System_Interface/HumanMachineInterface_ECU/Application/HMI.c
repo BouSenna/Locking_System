@@ -218,3 +218,13 @@ void openDoor(void){
 	_delay_ms(30000);
 	normal_SystemOperations();
 }
+
+void changePassword(void){
+	LCD_WriteCommand(LCD_CLEAR_CMD);
+	LCD_WriteString("Please wait...");
+	
+	_delay_ms(10000);
+	
+	USART_Transmit(REQUEST_TO_CHANGE_PASS);
+	firstTime_SystemOperations();
+}
