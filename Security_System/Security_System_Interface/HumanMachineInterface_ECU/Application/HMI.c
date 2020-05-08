@@ -64,10 +64,6 @@ void isFirstTime(void){
 	}
 }
 
-void normal_SystemOperations(void){
-	
-}
-
 
 void firstTime_SystemOperations(void){
 	U8 Password[PASSWORD_SIZE];
@@ -141,4 +137,26 @@ int passwordMatch(U8* pass1, U8* pass2){
 			return 0;
 	}
 	return 1;
+}
+
+
+
+void normal_SystemOperations(void){
+	U8 operation;
+	enterPassword();
+	
+	/// Display menu
+	LCD_WriteCommand(LCD_CLEAR_CMD);
+	LCD_WriteString("[0]New password");
+	LCD_SetCursor(1,0);
+	LCD_WriteString("[1]Open the door");
+	
+	while((operation = Keypad_keylisten()) ==' ');	/// wait for the user to choose the operation.
+	
+	if(operation == '0'){
+		changePassword();
+	}
+	else if(operation == '1'){
+		openDoor();
+	}
 }
